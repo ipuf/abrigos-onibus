@@ -1,11 +1,16 @@
 <script>
-	export let name;
+	import Local from './etapas/Local.svelte'
+	import Passeio from './etapas/Passeio.svelte'
 </script>
 
 <style>
-	h1 {
-		color: purple;
+	:global(html), :global(body) {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
 	}
 </style>
 
-<h1>Hello {name}!</h1>
+<Local/>
+<Passeio/>
