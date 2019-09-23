@@ -1,6 +1,7 @@
 <script>
 	import Local from './etapas/Local.svelte'
 	import Passeio from './etapas/Passeio.svelte'
+	import Abrigo from './etapas/Abrigo'
 </script>
 
 <style>
@@ -14,3 +15,4 @@
 
 <Local/>
 <Passeio/>
+<Abrigo/>
