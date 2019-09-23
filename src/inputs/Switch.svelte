@@ -6,6 +6,7 @@
   function toggleState (state) {
     cor = state
   }
+  
 </script>
 
 <style>
