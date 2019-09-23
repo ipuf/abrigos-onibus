@@ -1,7 +1,7 @@
 <script>
   let existe = 1 // 1 = existe, 0 = não existe
   let modeloSelecionado
-  let modelos = [{a: 'aaaaa'}, {b: 'bbbb'}]
+  let modelos = ['a', 'b', 'c', 'd', 'e', 'f']
   let calcerta = 1
   let qualidade
   let largura_maior
@@ -22,13 +22,13 @@
 </label>
 
 <p>modelo</p>
-<!-- <select bind:value={modeloSelecionado} on:change={alert('a')}>
-{#each modelo as modelos}
-    <option value={modelo.a}>
-        {'a'}
+<select bind:value={modeloSelecionado}>
+{#each modelos as modelo}
+    <option value={modelo}>
+        {'modelo: ' + modelo}
     </option>
 {/each}
-</select> -->
+</select>
 
 
 <p>qualidade</p>
