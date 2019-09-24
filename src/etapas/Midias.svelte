@@ -1,22 +1,28 @@
 <script>
-	let localizacao = 0
+	let localizacao = []
+	function getLocation(){
+		console.log('getLocatio')
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				console.log(position.coords.latitude, position.coords.longitude);
+				localizacao.push(position.coords.latitude, position.coords.longitude)
+			});
+		} else {
+			alert("I'm sorry, but geolocation services are not supported by your browser.");
+		}
+  	}
 
-	$: novoLocal = localizacao
 	
-	function getLocation() {
-        if (navigator.geolocation) {
-            localizacao = navigator.geolocation.getCurrentPosition(showPosition);
-        }
-    }
-
 </script>
+
+
+
+
+<label>3. MIDIAS</label>
 
 
 <button on:click={getLocation}>
 	click
 </button>
 
-<br>
-<p>
-	{novoLocal}
-</p>
+
