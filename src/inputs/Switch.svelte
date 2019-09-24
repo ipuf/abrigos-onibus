@@ -6,20 +6,26 @@
   function toggleState (state) {
     cor = state
   }
-  
 </script>
 
 <style>
   .container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+		align-items: center;
+    align-content: flex-end;
     width: 100%;
   }
   div {
+    flex: 1;
     padding: 0;
     margin: 10px;
-    width: 50%;
     height: 100px;
     color: grey;
+    background-color:white;
     border: 1.5px solid lightgray;
     border-radius: 5px;
 	}
@@ -36,7 +42,6 @@
 		color: white;
 	}
 </style>
-
 
 <section class="container">
   {#if estados === 2}
@@ -58,4 +63,3 @@
     </div>
   {/if}
 </section>
-

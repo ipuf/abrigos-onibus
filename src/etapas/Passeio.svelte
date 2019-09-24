@@ -1,10 +1,31 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import Switch from '../inputs/Switch.svelte'
+  
+  const dispatch = createEventDispatcher()
+  
   let existe
   let qualidade
   let calcerta
   let largura_maior
   let largura_menor
+
+  $: formObj = {
+    id: 'passeio',
+    body: {
+      existe: existe,
+      qualidade: qualidade,
+      calcerta: calcerta,
+      largura_maior: largura_maior,
+      largura_menor: largura_menor
+    }
+  }
+
+  function sendForm () {
+    dispatch('send', {
+      obj: formObj
+    })
+  }
 </script>
 
 <style>
@@ -15,36 +36,50 @@
     margin: auto;
     width: 75%;
   }
+  form > * {
+    margin: 10px;
+    font-size: 1.2em;
+    border: 1.5px solid lightgray;
+    border-radius: 5px;
+    color: grey;
+  }
+  #title {
+    font-size: 2em;
+    border: none;
+  }
   input[type="radio"] {
-    display: none;
+    opacity: 0;
+    height: 1%;
   }
   input[type="number"] {
-    align-self: end;
+    align-self: stretch;
     height: 100px;
-    width: 100%;
-    margin: auto;
   }
   label {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
   }
   p {
-    font-size: 1.2em;
     text-align: center;
     margin: auto;
+    height: 99%;
   }
 </style>
 
-<form class="container">
-  <h1>
+<form action="javascript:void(0);" on:submit={sendForm}>
+  <h1 id="title">
     2. CALÇADA
   </h1>
 
   <Switch>
     <label slot="good">
-      <input type="radio" name="existe" bind:group={existe} value={'sim'} required>
       <p>Sim</p>
+      <input type="radio" name="existe" bind:group={existe} value={'sim'} required>
     </label>
     <label slot="bad">
       <input type="radio" name="existe" bind:group={existe} value={'não'}>
@@ -54,7 +89,7 @@
 
   <Switch estados={3}>
     <label slot="good">
-      <input type="radio" bind:group={qualidade} value={'noref'}>
+      <input type="radio" bind:group={qualidade} value={'noref'} required>
       <p>Não necessita de reformas</p>
     </label>
     <label slot="medium">
@@ -69,7 +104,7 @@
 
   <Switch>
     <label slot="good">
-      <input type="radio" bind:group={calcerta} value={'sim'}>
+      <input type="radio" bind:group={calcerta} value={'sim'} required>
       <p>Sim</p>
     </label>
     <label slot="bad">
@@ -79,7 +114,7 @@
   </Switch>
 
   <input type="number" bind:value={largura_maior} placeholder="Largura do trecho mais largo" required>
-  <input type="number" bind:value={largura_menor} placeholder="Largura do trecho mais estreito" required>
+  <input type="number" bind:value={largura_menor} placeholder="Largura do trecho mais estreito" required>  
   
-  <input type="submit" on:click={() => alert('clicked')}>
+  <input type="submit" value="Próxima etapa">
 </form>

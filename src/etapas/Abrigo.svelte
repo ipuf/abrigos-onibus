@@ -1,20 +1,36 @@
 <script>
+	import { createEventDispatcher } from 'svelte'
 	import Switch from '../inputs/Switch.svelte'
-
+	
+  const dispatch = createEventDispatcher()
+	
 	let existe = 1 // 1 = existe, 0 = não existe
 	let modeloSelecionado
 	let modelos = ['a', 'b', 'c', 'd', 'e', 'f']
 	let qualidade
 	let largura_maior
 	let largura_menor
-</script>
 
+	$: formObj = {
+    id: 'abrigo',
+    body: {
+      existe: existe
+    }
+  }
+
+  function sendForm () {
+    dispatch('send', {
+      obj: formObj
+    })
+  }
+</script>
 
 <style>
 	form {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-around;
+		align-items: center;
 		margin: auto;
 		width: 75%;
 	}
@@ -33,6 +49,7 @@
 		height: 100%;
 	}
 	p {
+		
 		font-size: 1.2em;
 		text-align: center;
 		margin: auto;
@@ -40,7 +57,7 @@
 </style>
 
 
-<form class="container">
+<form action="javascript:void(0);" on:submit={sendForm}>
 	<h1>
 	2. ABRIGO
 	</h1>
@@ -87,4 +104,5 @@
 	<input type="number" bind:value={largura_maior} placeholder="Largura do trecho mais largo" required>
 	<input type="number" bind:value={largura_menor} placeholder="Largura do trecho mais estreito" required>
 
+	<input type="submit"  value="Próxima etapa">
 </form>
