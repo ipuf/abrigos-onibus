@@ -18,17 +18,21 @@
 		align-items: center;
     align-content: flex-end;
     width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    color: gray;
+    background-color:white;
+    height: 60px;
   }
   div {
     flex: 1;
     padding: 0;
-    margin: 10px;
-    height: 100px;
-    color: grey;
-    background-color:white;
-    border: 1.5px solid lightgray;
-    border-radius: 5px;
+    margin: 0;
+    height: 100%;
 	}
+  .container div:nth-child(n+2):nth-child(-n+3) {
+    border-left: 0.5px dashed lightgray;
+ }
   .good {
 		background-color: #44a64a;
 		color: white;

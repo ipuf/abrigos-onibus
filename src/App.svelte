@@ -1,3 +1,7 @@
+<svelte:head>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</svelte:head>
+
 <script>
 	import { fly } from 'svelte/transition' 
 	import Local from './etapas/Local.svelte'
@@ -27,25 +31,26 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		background: #fbfbfb
+		background: #F7F7F7;
+		font-family: 'Roboto', sans-serif
 	}
 </style>
 
 <!-- <Intro> -->
 {#if etapa === 1}
-	<div in:fly="{{ x: -1000, delay: 300, duration: 400 }}" out:fly="{{ x: 1000, duration: 400 }}">
+	<div in:fly="{{ x: -500, delay: 600, duration: 600 }}" out:fly="{{ x: 500, duration: 600 }}">
 		<Local on:send={nextPage} />
 	</div>		
 {:else if etapa === 2}
-	<div in:fly="{{ x: -1000, delay: 400, duration: 400 }}" out:fly="{{ x: 1000, duration: 400 }}">
+	<div in:fly="{{ x: -500, delay: 300, duration: 600 }}" out:fly="{{ x: 500, duration: 600 }}">
 		<Passeio on:send={nextPage}/>
 	</div>
 {:else if etapa === 3}
-	<div in:fly="{{ x: -1000, delay: 400, duration: 400 }}" out:fly="{{ x: 1000, duration: 400 }}">
+	<div in:fly="{{ x: -500, delay: 600, duration: 600 }}" out:fly="{{ x: 500, duration: 600 }}">
 		<Abrigo on:send={nextPage} />
 	</div>
 {:else if etapa === 4}
-	<div in:fly="{{ x: -1000, delay: 400, duration: 400 }}" out:fly="{{ x: 1000, duration: 400 }}">
+	<div in:fly="{{ x: -500, delay: 600, duration: 600 }}" out:fly="{{ x: 500, duration: 600 }}">
 		<Midias on:send={sendForm} />
 	</div>
 {/if}
