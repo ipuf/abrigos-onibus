@@ -1,16 +1,48 @@
 <script>
+	import { createEventDispatcher } from 'svelte'
+	import Switch from '../inputs/Switch.svelte'
+
+	const dispatch = createEventDispatcher()
+
+
 	let localizacao = []
-	function getLocation () {
+	let getFace = (arr, midiaFace) => {arr.push(midiaFace)}
+	let dimensao
+
+
+	let ladoUm = []
+	let ladoDois = []
+	let fundos = []
+
+	$: formObj = {
+		id: 'midia',
+		body: {
+			localizacao: localizacao,
+			ladoUm: ladoUm,
+			ladoDois: ladoDois,
+			fundos, fundos,
+			dimensao: dimensao
+		}
+	}
+
+	function getLocation(){
 		console.log('getLocatio')
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				console.log(position.coords.latitude, position.coords.longitude);
 				localizacao.push(position.coords.latitude, position.coords.longitude)
 			});
 		} else {
-			alert("I'm sorry, but geolocation services are not supported by your browser.");
+			alert("Seu navegador não suporta o serviço de localização");
 		}
-  }
+  	}
+
+	function sendForm () {
+		dispatch('send', {
+			obj: formObj
+		})
+		console.log(formObj)
+	}
+
 </script>
 
 <style>
@@ -100,18 +132,108 @@
 </style>
 
 <div class="header">	
-	<h1>Mídias</h1>
+	<h1>Mídia</h1>
 	<span class="counter">4/4</span>
 </div>
 
-<form  action="javascript:void(0);" on:submit>
-	<button on:click={getLocation}>
-		click
+<form action="javascript:void(0);" on:submit={sendForm}>
+
+	<button on:click={getLocation} type="button">
+		localizacao
 	</button>
+
+	<label>Lado 1</label>
+	<Switch>
+		<label slot="good">
+			<input type="radio" bind:group={ladoUm[0]} value={1}>
+			<p>Possui midia</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={ladoUm[0]} value={0}>
+			<p>Não possui midia</p>
+		</label>
+	</Switch>
+
+	{#if ladoUm[0] === 1}
+		<label>Lado 1: Face</label>
+		<Switch>
+			<label slot="good">
+				<input type="radio" bind:group={ladoUm[1]}  value={'interna'}>
+				<p>Dentro</p>
+			</label>
+			<label slot="bad">
+				<input type="radio" bind:group={ladoUm[1]}  value={'externa'}>
+				<p>Fora</p>
+			</label>
+		</Switch>
+	{/if}
+
+	<label>Lado Dois</label>
+	<Switch>
+		<label slot="good">
+			<input type="radio" bind:group={ladoDois[0]} value={1}>
+			<p>Possui midia</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={ladoDois[0]} value={0}>
+			<p>Não possui midia</p>
+		</label>
+	</Switch>
+
+	{#if ladoDois[0] === 1}
+		<label>Lado 1: Face</label>
+		<Switch>
+			<label slot="good">
+				<input type="radio" bind:group={ladoDois[1]}  value={'interna'}>
+				<p>Dentro</p>
+			</label>
+			<label slot="bad">
+				<input type="radio" bind:group={ladoDois[1]}  value={'externa'}>
+				<p>Fora</p>
+			</label>
+		</Switch>
+	{/if}
+
+	<label>Fundos</label>
+	<Switch>
+		<label slot="good">
+			<input type="radio" bind:group={fundos[0]} value={1}>
+			<p>Possui midia</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={fundos[0]} value={0}>
+			<p>Não possui midia</p>
+		</label>
+	</Switch>
+
+	{#if fundos[0] === 1}
+		<label>Lado 1: Face</label>
+		<Switch>
+			<label slot="good">
+				<input type="radio" bind:group={fundos[1]}  value={'interna'}>
+				<p>Dentro</p>
+			</label>
+			<label slot="bad">
+				<input type="radio" bind:group={fundos[1]}  value={'externa'}>
+				<p>Fora</p>
+			</label>
+		</Switch>
+	{/if}
+
+	<label>Dimensão</label>
+	<Switch>
+		<label slot="good">
+			<input type="radio" bind:group={dimensao} value={'retrato'}>
+			<p>Retrato</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={dimensao} value={'box'}>
+			<p>Box</p>
+		</label>
+	</Switch>
 
 	<div class="buttons">
 		<button class="back" type="button"><span>Voltar </span></button>
 		<button class="next" type="submit"><span>Próximo </span></button>
 	</div>
 </form>
-
