@@ -20,7 +20,8 @@
 			localizacao: localizacao,
 			ladoUm: ladoUm,
 			ladoDois: ladoDois,
-			fundos, fundos
+			fundos, fundos,
+			dimensao: dimensao
 		}
 	}
 
@@ -178,6 +179,18 @@
 			</label>
 		</Switch>
 	{/if}
+
+	<label>Dimensão</label>
+	<Switch>
+		<label slot="good">
+			<input type="radio" bind:group={dimensao} value={'retrato'}>
+			<p>Retrato</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={dimensao} value={'box'}>
+			<p>Box</p>
+		</label>
+	</Switch>
 
 	<input type="submit"  value="Próxima etapa">
 </form>
