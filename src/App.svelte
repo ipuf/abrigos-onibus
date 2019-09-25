@@ -6,7 +6,7 @@
 	import Midias from './etapas/Midias.svelte'
 
 	let form = {}
-	let etapa = 1
+	let etapa = 4
 
 	function nextPage (e) {
 		form[e.detail.obj.id] = e.detail.obj.body
