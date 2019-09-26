@@ -7,22 +7,28 @@
 	
 	let existe = 1 // 1 = existe, 0 = não existe
 	let modeloSelecionado
-	let modelos = ['a', 'b', 'c', 'd', 'e', 'f']
+	let modelos = ['A', 'B', 'C', 'D', 'E', 'F']
 	let qualidade
 	let largura_maior
 	let largura_menor
 
 	$: formObj = {
-    id: 'abrigo',
+    etapa: 'abrigo',
     body: {
-      existe: existe
+			existe: existe,
+			modelo: modeloSelecionado,
+			qualidade: qualidade,
+			larg_maior: largura_maior,
+			larg_menor: largura_menor
     }
   }
 
+	function backPage () {
+    dispatch('back', {})
+	}
+	
   function sendForm () {
-    dispatch('send', {
-      obj: formObj
-    })
+    dispatch('send', formObj)
   }
 </script>
 
@@ -119,10 +125,9 @@
 		</label>
 	</Switch>
 
+	<h2>Dimensões (em centímetros):</h2>
+	<input type="number" bind:value={largura_maior} placeholder="Fundo" min="0" max="2000" required>
+	<input type="number" bind:value={largura_menor} placeholder="Lateral" min="0" max="2000" required>
 
-	<h2>Dimensões</h2>
-	<input type="number" bind:value={largura_maior} placeholder="Maior largura" required>
-	<input type="number" bind:value={largura_menor} placeholder="Menor largura" required>
-
-	<Buttons/>
+	<Buttons on:click={backPage} />
 </form>

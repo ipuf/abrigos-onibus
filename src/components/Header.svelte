@@ -1,4 +1,5 @@
 <script>
+	import { flip } from 'svelte/animate'
   export let atual
   export let etapa
 </script>
@@ -9,7 +10,7 @@
 		justify-content: space-around;
 		align-items: center;
 		width: 100%;
-		height: 35px;
+		height: 45px;
 		background-color: darkblue;
 		margin-bottom: 5px;
 	}
@@ -26,5 +27,5 @@
 
 <div class="header">	
 	<h1>{ atual }</h1>
-	<span class="counter">{ etapa }/4</span>
+	<span class="counter">Etapa { etapa } de 4</span>
 </div>

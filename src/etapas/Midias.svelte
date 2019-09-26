@@ -4,8 +4,7 @@
 	import Buttons from '../components/Buttons.svelte'
 
 	const dispatch = createEventDispatcher()
-
-	let localizacao = []
+	
 	let getFace = (arr, midiaFace) => {arr.push(midiaFace)}
 	let dimensao
 
@@ -14,32 +13,21 @@
 	let fundos = []
 
 	$: formObj = {
-		id: 'midia',
+		etapa: 'midia',
 		body: {
-			localizacao: localizacao,
 			ladoUm: ladoUm,
 			ladoDois: ladoDois,
-			fundos, fundos,
+			fundos: fundos,
 			dimensao: dimensao
 		}
 	}
 
-	function getLocation(){
-		console.log('getLocatio')
-		if ("geolocation" in navigator) {
-			navigator.geolocation.getCurrentPosition((position) => {
-				localizacao.push(position.coords.latitude, position.coords.longitude)
-			});
-		} else {
-			alert("Seu navegador não suporta o serviço de localização");
-		}
-  	}
-
+	function backPage () {
+    dispatch('back', {})
+	}
+	
 	function sendForm () {
-		dispatch('send', {
-			obj: formObj
-		})
-		console.log(formObj)
+		dispatch('send', formObj)
 	}
 </script>
 
@@ -84,11 +72,6 @@
 
 
 <form action="javascript:void(0);" on:submit={sendForm}>
-
-	<button on:click={getLocation} type="button">
-		Localizacao
-	</button>
-
 	<h2>Lado 1</h2>
 	<Switch>
 		<label slot="good">
@@ -167,7 +150,7 @@
 		</Switch>
 	{/if}
 
-	<h2>Dimensão</h2>
+	<h2>Dimensão (tipo):</h2>
 	<Switch>
 		<label slot="good">
 			<input type="radio" bind:group={dimensao} value={'retrato'}>
@@ -178,6 +161,6 @@
 			<p>Box</p>
 		</label>
 	</Switch>
-
-	<Buttons/>
+	
+	<Buttons on:click={backPage} />
 </form>

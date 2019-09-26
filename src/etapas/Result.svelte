@@ -1,9 +1,9 @@
 <script>
-	export let back = true
+	export let success
 </script>
 
 <style>
-  .buttons {
+	.buttons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -11,9 +11,8 @@
     justify-content: space-between;
 		align-items: center;
     align-content: flex-end;
-		width: 100%;
-		margin-top: 15px;
-		margin-bottom: 10px;
+		width: 75%;
+		margin: auto; 
   }
 	.next {
 		flex: 1;
@@ -48,23 +47,15 @@
 		opacity: 1;
 		right: 0;
 	}
-	.back {
-		flex: 1;
-		font-size: 1em;
-		border-radius: 2px;
-		background-color: green;
-		border: none;
-		color: #FFFFFF;
-		text-align: center;
-		padding: 17.5px;
-		cursor: pointer;
-		margin-right: 10px;
-	}
 </style>
 
 <div class="buttons">
-	{#if back}
-  	<button class="back" type="button" on:click><span>Voltar </span></button>
+	{#if success}
+  	<h2>Formulário enviado com sucesso. Clique para inserir o próximo ponto.</h2>
+		<button class="next" on:click><span>Próximo ponto</span></button>
+	{:else}
+		<h2>Erro no envio de formulário. Clique para começar novamente.</h2>
+		<button class="next" on:click><span>Recomeçar inserção</span></button>
+		<p>Caso não esteja conseguindo enviar o formulário, verifique sua conexão de internet.<br><br>Se sua conexão estiver normal, comunique seu supervisor.</p>
   {/if}
-	<button class="next" type="submit"><span>Próximo </span></button>
 </div>

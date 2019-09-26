@@ -12,7 +12,7 @@
   let largura_menor
 
   $: formObj = {
-    id: 'passeio',
+    etapa: 'passeio',
     body: {
       existe: existe,
       qualidade: qualidade,
@@ -22,10 +22,12 @@
     }
   }
 
+  function backPage () {
+    dispatch('back', {})
+  }
+
   function sendForm () {
-    dispatch('send', {
-      obj: formObj
-    })
+    dispatch('send', formObj)
   }
 </script>
 
@@ -116,9 +118,9 @@
     </label>
   </Switch>
 
-  <h2>Dimensões:</h2>
-  <input type="number" bind:value={largura_maior} placeholder="Largura do trecho mais largo" required>
-  <input type="number" bind:value={largura_menor} placeholder="Largura do trecho mais estreito" required>  
-  
-  <Buttons/>
+  <h2>Dimensões (em centímetros):</h2>
+  <input type="number" bind:value={largura_maior} placeholder="Largura do trecho mais largo" min="0" max="2000" required>
+  <input type="number" bind:value={largura_menor} placeholder="Largura do trecho mais estreito" min="0" max="2000" required>
+    
+  <Buttons on:click={backPage} />
 </form>
