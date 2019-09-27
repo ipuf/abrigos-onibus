@@ -8,6 +8,15 @@
   let numero_pt
   let gpslog = ''
   let localizacao = []
+  
+  $: formObj = {
+    etapa: 'local',
+    body: {
+      rua: rua,
+      numero_pt: numero_pt,
+      localizacao: localizacao
+    }
+  }
 
   function getLocation () {
     if (navigator.geolocation) {
@@ -41,21 +50,16 @@
         break;
     }
   }
-
-  onMount(() => getLocation())
-
-  $: formObj = {
-    etapa: 'local',
-    body: {
-      rua: rua,
-      numero_pt: numero_pt,
-      localizacao: localizacao
-    }
-  }
+  
+  function backPage () {
+    dispatch('back', {})
+	}
 
   function sendForm () {
     dispatch('send', formObj)
   }
+  
+  onMount(() => getLocation())
 </script>
 
 <style>
@@ -98,5 +102,5 @@
     <input type="number" bind:value={numero_pt} placeholder="Número do ponto" required>
   </div>
   
-  <Buttons back={false}/>
+  <Buttons on:click={backPage} />
 </form>

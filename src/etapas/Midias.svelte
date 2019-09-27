@@ -1,16 +1,15 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
 	import Switch from '../components/Switch.svelte'
+	import Checkswitch from '../components/Checkswitch.svelte'
 	import Buttons from '../components/Buttons.svelte'
 
 	const dispatch = createEventDispatcher()
 	
-	let getFace = (arr, midiaFace) => {arr.push(midiaFace)}
 	let dimensao
-
-	let ladoUm = []
-	let ladoDois = []
-	let fundos = []
+	let ladoUm = { prop: 0, faces: []}
+	let ladoDois = { prop: 0, faces: []}
+	let fundos = { prop: 0, faces: []}
 
 	$: formObj = {
 		etapa: 'midia',
@@ -48,7 +47,7 @@
 		margin-bottom: 2px;
 		align-self: start;
 	}
-	input[type="radio"] {
+	input[type="radio"], input[type="checkbox"] {
 		font-size: 1em;
     opacity: 0;
     height: 1px;
@@ -72,93 +71,97 @@
 
 
 <form action="javascript:void(0);" on:submit={sendForm}>
-	<h2>Lado 1</h2>
+	<h2>Lateral 1:</h2>
 	<Switch>
 		<label slot="good">
-			<input type="radio" bind:group={ladoUm[0]} value={1}>
+			<input type="radio" bind:group={ladoUm.prop} value={1}>
 			<p>Possui midia</p>
 		</label>
-		<label slot="bad">
-			<input type="radio" bind:group={ladoUm[0]} value={0}>
+		<label slot="bad" for="l10">
+			<input type="radio" bind:group={ladoUm.prop} value={0}>
 			<p>Não possui midia</p>
 		</label>
 	</Switch>
 
-	{#if ladoUm[0] === 1}
-		<h2>Lado 1: Face</h2>
-		<Switch>
-			<label slot="good">
-				<input type="radio" bind:group={ladoUm[1]}  value={'interna'}>
+	{#if ladoUm.prop === 1}
+		<h2>Faces com mídia (Lateral 1):</h2>
+		<Checkswitch>
+			<label slot="one" for="lf1">
+				<input type="checkbox" name="lf1" bind:group={ladoUm.faces} value={'interna'}>
 				<p>Dentro</p>
 			</label>
-			<label slot="bad">
-				<input type="radio" bind:group={ladoUm[1]}  value={'externa'}>
+			<label slot="two" for="lf2">
+				<input type="checkbox" name="lf2" bind:group={ladoUm.faces} value={'externa'}>
 				<p>Fora</p>
 			</label>
-		</Switch>
+		</Checkswitch>
 	{/if}
 
-	<h2>Lado Dois</h2>
+	<h2>Lateral 2:</h2>
 	<Switch>
 		<label slot="good">
-			<input type="radio" bind:group={ladoDois[0]} value={1}>
+			<input type="radio" bind:group={ladoDois.prop} value={1}>
 			<p>Possui midia</p>
 		</label>
 		<label slot="bad">
-			<input type="radio" bind:group={ladoDois[0]} value={0}>
+			<input type="radio" bind:group={ladoDois.prop} value={0}>
 			<p>Não possui midia</p>
 		</label>
 	</Switch>
 
-	{#if ladoDois[0] === 1}
-		<h2>Lado 1: Face</h2>
-		<Switch>
-			<label slot="good">
-				<input type="radio" bind:group={ladoDois[1]}  value={'interna'}>
+	{#if ladoDois.prop === 1}
+		<h2>Faces com mídia (Lateral 2):</h2>
+		<Checkswitch>
+			<label slot="one" for="lf21">
+				<input type="checkbox" name="lf21" bind:group={ladoDois.faces} value={'interna'}>
 				<p>Dentro</p>
 			</label>
-			<label slot="bad">
-				<input type="radio" bind:group={ladoDois[1]}  value={'externa'}>
+			<label slot="two" for="lf22">
+				<input type="checkbox" name="lf22" bind:group={ladoDois.faces} value={'externa'}>
 				<p>Fora</p>
 			</label>
-		</Switch>
+		</Checkswitch>
 	{/if}
 
-	<h2>Fundos</h2>
+	<h2>Fundos:</h2>
 	<Switch>
 		<label slot="good">
-			<input type="radio" bind:group={fundos[0]} value={1}>
+			<input type="radio" bind:group={fundos.prop} value={1}>
 			<p>Possui midia</p>
 		</label>
 		<label slot="bad">
-			<input type="radio" bind:group={fundos[0]} value={0}>
+			<input type="radio" bind:group={fundos.prop} value={0}>
 			<p>Não possui midia</p>
 		</label>
 	</Switch>
 
-	{#if fundos[0] === 1}
-		<h2>Lado 1: Face</h2>
-		<Switch>
-			<label slot="good">
-				<input type="radio" bind:group={fundos[1]}  value={'interna'}>
+	{#if fundos.prop === 1}
+		<h2>Faces com mídia (Fundos):</h2>
+		<Checkswitch>
+			<label slot="one" for="ff1">
+				<input type="checkbox" name="ff1" bind:group={fundos.faces} value={'interna'}>
 				<p>Dentro</p>
 			</label>
-			<label slot="bad">
-				<input type="radio" bind:group={fundos[1]}  value={'externa'}>
+			<label slot="two" for="ff2">
+				<input type="checkbox" name="ff2" bind:group={fundos.faces} value={'externa'}>
 				<p>Fora</p>
 			</label>
-		</Switch>
+		</Checkswitch>
 	{/if}
 
-	<h2>Dimensão (tipo):</h2>
-	<Switch>
+	<h2>Dimensão da mídia de fundos (tipo):</h2>
+	<Switch estados={3}>
 		<label slot="good">
 			<input type="radio" bind:group={dimensao} value={'retrato'}>
 			<p>Retrato</p>
 		</label>
-		<label slot="bad">
+		<label slot="medium">
 			<input type="radio" bind:group={dimensao} value={'box'}>
 			<p>Box</p>
+		</label>
+		<label slot="bad">
+			<input type="radio" bind:group={dimensao} value={'box'}>
+			<p>Não há</p>
 		</label>
 	</Switch>
 	

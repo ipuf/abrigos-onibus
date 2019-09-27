@@ -19,7 +19,7 @@
 		flex: 1;
 		font-size: 1em;
 		border-radius: 2px;
-		background-color: green;
+		background-color: #44a64a;
 		border: none;
 		color: #FFFFFF;
 		text-align: center;
@@ -52,7 +52,7 @@
 		flex: 1;
 		font-size: 1em;
 		border-radius: 2px;
-		background-color: green;
+		background-color: #44a64a;
 		border: none;
 		color: #FFFFFF;
 		text-align: center;

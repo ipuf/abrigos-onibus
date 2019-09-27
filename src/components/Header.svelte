@@ -1,5 +1,4 @@
 <script>
-	import { flip } from 'svelte/animate'
   export let atual
   export let etapa
 </script>

@@ -18,8 +18,8 @@
 
 	let form = {}
 	let auth = false
-	let success
 	let done = false
+	let success = false
 	let uid = ''
 	let etapa = 0
 	let titulos = ['Local','Calçada','Ponto','Propaganda']
@@ -27,7 +27,11 @@
 	$: atual = titulos[etapa]
 
 	function backPage () {
-		setTimeout(() => etapa -= 1, 300)
+		if (etapa > 0) {
+			setTimeout(() => etapa -= 1, 300)
+		} else if (etapa === 0) {
+			setTimeout(() => auth = false, 300)
+		}
 	}
 
 	function nextPage (e) {

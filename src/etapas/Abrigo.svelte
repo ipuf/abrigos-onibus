@@ -104,7 +104,7 @@
 		<option value='' selected disabled>Selecionar modelo</option>
 		{#each modelos as modelo}
 			<option value={modelo}>
-				{'modelo: ' + modelo}
+				{'Modelo: ' + modelo}
 			</option>
 		{/each}
 	</select>
