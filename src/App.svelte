@@ -45,6 +45,7 @@
 
 	function sendForm (e) {
 		form[e.detail.etapa] = e.detail.body
+		form[e.detail.coords] = e.detail.localizacao
 		console.log(form)
 		db.collection(uid).add(form)
 			.then(() => {

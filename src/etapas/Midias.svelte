@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte'
+	import { onMount, createEventDispatcher } from 'svelte'
 	import Switch from '../components/Switch.svelte'
 	import Checkswitch from '../components/Checkswitch.svelte'
 	import Buttons from '../components/Buttons.svelte'
@@ -10,7 +10,10 @@
 	let ladoUm = { prop: 0, faces: []}
 	let ladoDois = { prop: 0, faces: []}
 	let fundos = { prop: 0, faces: []}
-
+	
+	let gpslog = ''
+  let localizacao = []
+  	
 	$: formObj = {
 		etapa: 'midia',
 		body: {
@@ -18,7 +21,42 @@
 			ladoDois: ladoDois,
 			fundos: fundos,
 			dimensao: dimensao
-		}
+		},
+		coords: 'coords',
+		localizacao: localizacao
+	}
+	
+	function getLocation () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Este navegador não suporta o serviço de localização, por favor utilize outro navegador.");
+    }
+  }
+
+  function showPosition (position) {
+    localizacao.push(position.coords.latitude, position.coords.longitude)    
+  }
+
+  function showError (error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        gpslog = "User denied the request for Geolocation."
+        alert('Por favor, habilite seu GPS.')
+        document.location.reload(true)
+      case error.POSITION_UNAVAILABLE:
+        gpslog = "Location information is unavailable."
+        alert('Por favor, habilite seu GPS.')
+        document.location.reload(true)
+      case error.TIMEOUT:
+        gpslog = "The request to get user location timed out."
+        alert('Conexão de internet instável. Aguarde um minuto e tente novamente.')
+        document.location.reload(true)
+      case error.UNKNOWN_ERROR:
+        gpslog = "An unknown error occurred."
+        alert('Erro desconhecido. Aguarde um minuto e tente novamente.')
+        document.location.reload(true)
+    }
 	}
 
 	function backPage () {
@@ -28,6 +66,8 @@
 	function sendForm () {
 		dispatch('send', formObj)
 	}
+
+	onMount(() => getLocation())
 </script>
 
 <style>

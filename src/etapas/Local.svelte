@@ -7,14 +7,12 @@
   let rua
   let numero_pt
   let gpslog = ''
-  let localizacao = []
   
   $: formObj = {
     etapa: 'local',
     body: {
       rua: rua,
       numero_pt: numero_pt,
-      localizacao: localizacao
     }
   }
 
@@ -27,27 +25,27 @@
   }
 
   function showPosition (position) {
-    localizacao.push(position.coords.latitude, position.coords.longitude)    
+    console.log('Posição obtida.')   
   }
 
   function showError (error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         gpslog = "User denied the request for Geolocation."
-        alert('Por favor, habilite seu GPS e recarregue a página.')
-        break;
+        alert('Por favor, habilite seu GPS.')
+        document.location.reload(true)
       case error.POSITION_UNAVAILABLE:
         gpslog = "Location information is unavailable."
-        alert('Por favor, habilite seu GPS e recarregue a página..')
-        break;
+        alert('Por favor, habilite seu GPS.')
+        document.location.reload(true)
       case error.TIMEOUT:
         gpslog = "The request to get user location timed out."
         alert('Conexão de internet instável. Aguarde um minuto e tente novamente.')
-        break;
+        document.location.reload(true)
       case error.UNKNOWN_ERROR:
         gpslog = "An unknown error occurred."
         alert('Erro desconhecido. Aguarde um minuto e tente novamente.')
-        break;
+        document.location.reload(true)
     }
   }
   

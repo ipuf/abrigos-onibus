@@ -1,5 +1,5 @@
 <script>
-	export let success
+  export let success
 </script>
 
 <style>
