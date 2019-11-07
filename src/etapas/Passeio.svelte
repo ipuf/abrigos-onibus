@@ -57,6 +57,7 @@
 	input[type="number"] {
 		font-size: 1em;
 		align-self: stretch;
+    width: 100%;
     height: 60px;
 		border: 1px solid lightgray;
 		border-radius: 2px;
@@ -82,11 +83,11 @@
   <Switch>
     <label slot="good">
       <p>Sim</p>
-      <input type="radio" name="existe" bind:group={existe} value={'sim'} required>
+      <input type="radio" name="existe" bind:group={existe} value={true} required>
     </label>
     <label slot="bad">
       <p>Não</p>
-      <input type="radio" name="existe" bind:group={existe} value={'não'} required>
+      <input type="radio" name="existe" bind:group={existe} value={false} required>
     </label>
   </Switch>
 
@@ -110,11 +111,11 @@
   <Switch>
     <label slot="good">
       <p>Sim</p>
-      <input type="radio" name="calcerta" bind:group={calcerta} value={'sim'} required>
+      <input type="radio" name="calcerta" bind:group={calcerta} value={true} required>
     </label>
     <label slot="bad">
       <p>Não</p>
-      <input type="radio" name="calcerta" bind:group={calcerta} value={'não'} required>
+      <input type="radio" name="calcerta" bind:group={calcerta} value={false} required>
     </label>
   </Switch>
 

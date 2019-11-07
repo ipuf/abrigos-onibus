@@ -57,6 +57,7 @@
   }
 	input[type="number"] {
 		font-size: 1em;
+		width: 100%;
 		align-self: stretch;
     height: 60px;
 		border: 1px solid lightgray;
@@ -90,11 +91,11 @@
 	<h2>Abrigo existe:</h2>
 	<Switch>
 		<label slot="good">
-			<input type="radio" name="existe" bind:group={existe} value={1} required>
+			<input type="radio" name="existe" bind:group={existe} value={true} required>
 			<p>Sim</p>
 		</label>
 		<label slot="bad">
-			<input type="radio" name="existe" bind:group={existe} value={0} required>
+			<input type="radio" name="existe" bind:group={existe} value={false} required>
 			<p>Não</p>
 		</label>
 	</Switch>

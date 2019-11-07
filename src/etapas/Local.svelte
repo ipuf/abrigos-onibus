@@ -85,6 +85,7 @@
 	input[type="number"], input[type="text"] {
 		font-size: 1em;
 		align-self: stretch;
+    width: 100%;
     height: 60px;
 		border: 1px solid lightgray;
 		border-radius: 2px;

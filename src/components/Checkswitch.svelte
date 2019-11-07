@@ -1,9 +1,9 @@
 <script>
-  export let estados = 2
+  export let estados = 2;
 
-  let activeOne = false
-  let activeTwo = false
-  let activeThree = false
+  let activeOne = false;
+  let activeTwo = false;
+  let activeThree = false;
 </script>
 
 <style>
@@ -13,13 +13,13 @@
     flex-wrap: wrap;
     flex-flow: row wrap;
     justify-content: center;
-		align-items: center;
+    align-items: center;
     align-content: flex-end;
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 2px;
     color: gray;
-    background-color:white;
+    background-color: white;
     height: 60px;
   }
   div {
@@ -27,33 +27,39 @@
     padding: 0;
     margin: 0;
     height: 100%;
-	}
-  .container div:nth-child(n+2):nth-child(-n+3) {
+  }
+  .container div:nth-child(n + 2):nth-child(-n + 3) {
     border-left: 0.5px dashed lightgray;
- }
+  }
   .active {
-		background-color: #44a64a;
-		color: white;
-	}
+    background-color: #44a64a;
+    color: white;
+  }
+  :global(.active button) {
+    background-color: #44a64a;
+    color: white !important;
+  }
 </style>
 
 <section class="container">
   {#if estados === 2}
-    <div class:active="{activeOne}" on:click="{() => activeOne = !activeOne}">
-      <slot name="one"></slot>
+    <div class:active={activeOne} on:click={() => (activeOne = !activeOne)}>
+      <slot name="one" />
     </div>
-    <div class:active="{activeTwo}" on:click="{() => activeTwo = !activeTwo}">
-      <slot name="two"></slot>
+    <div class:active={activeTwo} on:click={() => (activeTwo = !activeTwo)}>
+      <slot name="two" />
     </div>
   {:else if estados === 3}
-    <div class:active="{activeOne}" on:click="{() => activeOne = !activeOne}">
-      <slot name="one"></slot>
+    <div class:active={activeOne} on:click={() => (activeOne = !activeOne)}>
+      <slot name="one" />
     </div>
-    <div class:active="{activeTwo}" on:click="{() => activeTwo = !activeTwo}">
-      <slot name="two"></slot>
+    <div class:active={activeTwo} on:click={() => (activeTwo = !activeTwo)}>
+      <slot name="two" />
     </div>
-    <div class:active="{activeThree}" on:click="{() => activeThree = !activeThree}">
-      <slot name="three"></slot>
+    <div
+      class:active={activeThree}
+      on:click={() => (activeThree = !activeThree)}>
+      <slot name="three" />
     </div>
   {/if}
 </section>
